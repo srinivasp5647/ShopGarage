@@ -83,7 +83,7 @@ class ProductView(TemplateView):                                # we can give sa
 def AddToCart(request):
     data = json.loads(request.body)
     product_id = data['productId']
-    print('productId :', product_id)
+    print('See productId :', product_id)
 
     return JsonResponse('Item was added', safe=False)
 
