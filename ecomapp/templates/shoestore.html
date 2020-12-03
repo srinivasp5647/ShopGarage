@@ -1,0 +1,25 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block title %}Shoe Store{% endblock %}
+
+
+{% block content%}
+<div class="container">
+    
+    <div class="row">
+        {% for product in products %}
+        <div class="col-lg-4">
+        <img class="thumbnail" src="{{ product.image.url }}">
+        <div class="box-element">
+            <h3>{{product.title}}</h3>
+            <hr>
+            <a class="btn btn-outline-secondary " data-prodid="{{product.id}}" onclick="addToCart(event)">Add to Cart</a>
+            <a class="btn btn-outline-success" href="{% url 'ecomapp:productview' product.slug %}">View</a>
+            <h5 style="display:inline-block; float:right">Rs. {{product.price}}</h5>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+</div>
+{% endblock %}

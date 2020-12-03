@@ -1,0 +1,20 @@
+{% extends 'home.html' %}
+
+{% block title%}{{product.title}}{% endblock %}
+
+{% block content%}
+<div class="container">
+    <div class="row" style="margin-top: 100px;">
+        <div class="col-md-6">
+            <img src="{{product.imageURL}}" alt="" class="img-fluid">
+        </div>  
+        <div class='col-md-6'>
+            <h4 class="text-info">Category : {{product.category}}</h4>
+            <hr>
+            <h6>Product : {{product.title}}</h6>
+            <p>Rs . {{product.price}}</p >
+            <a href="#" class="btn btn-info">Add to Cart</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
