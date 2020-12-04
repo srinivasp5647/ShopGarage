@@ -13,7 +13,7 @@
             <hr>
             <h6>Product : {{product.title}}</h6>
             <p>Rs . {{product.price}}</p >
-            <a href="#" class="btn btn-info">Add to Cart</a>
+            <button class="btn btn-info" data-prodid="{{product.id}}" onclick="addToCart(event)">Add to Cart</button>
         </div>
     </div>
 </div>

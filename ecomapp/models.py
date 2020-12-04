@@ -53,6 +53,8 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField()
     total = models.FloatField()
 
+    def __str__(self):
+        return 'Cart: ' + str(self.cart.id) + ' CartItem: ' + str(self.id)
 
 ORDER_STATUS = (
     ("Order Received", "Order Received"),

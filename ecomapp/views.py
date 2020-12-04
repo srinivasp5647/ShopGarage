@@ -81,10 +81,44 @@ class ProductView(TemplateView):                                # we can give sa
 
 
 def AddToCart(request):
-    data = json.loads(request.body)
+    data = json.loads(request.body)                 # grab data from backend
     product_id = data['productId']
     print('See productId :', product_id)
+    #get product
+    product_obj = Product.objects.get(id=product_id)
 
+    # check if cart exists
+    cart_id =request.session.get('cart_id', None)
+    #request.session.flush()                            #this line delete existing sessions
+    print('this is session :', cart_id)
+    if cart_id:
+        cart_obj = Cart.objects.get(id=cart_id)
+        product_in_cart = cart_obj.cartitem_set.filter(product=product_obj)
+        # item already in cart
+        if product_in_cart.exists():
+            cartitem = product_in_cart.last()
+            cartitem.quantity += 1
+            cartitem.total += product_obj.price
+            cartitem.save()
+            cart_obj.total += product_obj.price
+            cart_obj.save()
+
+        else:
+            cartitem = CartItem.objects.create(
+                cart=cart_obj, product=product_obj, price=product_obj.price, quantity=1, total=product_obj.price
+            )
+            cart_obj.total += product_obj.price
+            cart_obj.save()
+        
+    else:
+        cart_obj = Cart.objects.create(total=0)
+        request.session['cart_id'] = cart_obj.id
+        cartitem = CartItem.objects.create(
+                cart=cart_obj, product=product_obj, price=product_obj.price, quantity=1, total=product_obj.price
+            )
+        cart_obj.total += product_obj.price
+        cart_obj.save()
+        
     return JsonResponse('Item was added', safe=False)
 
 

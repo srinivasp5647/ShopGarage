@@ -3,17 +3,14 @@ function addToCart(event) {
     var pro_id = event.srcElement.dataset.prodid
     console.log('Product id :', pro_id);
     
-    console.log('User:', user);
-    if (user == 'AnonymousUser'){
-        console.log('User is not authenticated')
-    }else {
-        updateCart(pro_id)
-    }
+   
+    updateCart(pro_id)
+    
 }
 
 
 function updateCart(pro_id){
-    console.log('User is authenticated, sending data..')
+    // console.log('User is authenticated, sending data..')
 
     var url = '/addtocart/'
 

@@ -11,7 +11,7 @@
         <div  style="width:285px" class="box-element">
           <h4>{{product.title}}</h4>
           <hr>
-          <button class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+          <button class="btn btn-outline-secondary add-btn" data-prodid="{{product.id}}" onclick="addToCart(event)">Add to Cart</button>
           <a class="btn btn-outline-success" href="{% url 'ecomapp:productview' product.slug %}">View</a>
           <h6 style="display:inline-block; float:right">Rs. {{product.price}}</h6>
         </div>
