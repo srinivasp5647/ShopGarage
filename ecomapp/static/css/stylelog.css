@@ -14,8 +14,10 @@ body {
     transform: translate(-50%, -50%);
     background: #191919;
     text-align: center;
-    /* border-radius:40px 40px 40px 40px; */
+    border-radius:40px 40px 40px 40px;
   }
+
+
   
   .box h1{
     color: white;

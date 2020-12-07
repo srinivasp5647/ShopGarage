@@ -31,3 +31,4 @@ function updateCart(pro_id){
         console.log('data :', data)
     })
 }
+

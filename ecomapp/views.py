@@ -4,6 +4,8 @@ from django.views.generic.base import TemplateView
 from .forms import *
 from django.http import JsonResponse
 import json
+from django.contrib.auth import authenticate
+
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -12,14 +14,44 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
         return context
 
 
 def LogIn(request):
     form = loginform()
+    if request.method == 'POST':
+        form = loginform(request.POST)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username= username, password= password)
+        print('user : ', user)
+        if user is not None:
+            return redirect('/')
+        else:
+            pass
     context = {'form' : form}
     return render(request, 'login.html', context)
+
+def LogOut(request):
+
+    auth.logout(request)
+
+    return redirect('/')
+
+def SignIn(request):
+    form = SigninForm()
+    if request.method == 'POST':
+        form = SigninForm(request.POST)
+        if form.is_valid():
+            firstname = request.POST.get('first_name')
+            lastname  = request.POST.get('last_name')
+            email     = request.POST.get('email')
+            password  = request.POST.get('password')
+            
+            user = User.objects.create_user(firstname+' '+lastname, email, password)
+            return render(request, 'home.html')
+    context = {'form' : form}
+    return render(request, 'signin.html', context)
 
 
 class AboutView(TemplateView):
@@ -123,7 +155,7 @@ def AddToCart(request):
 
 
 def CartView(request):
-
+    
     context = {}
 
     return render(request, 'cart.html', context)

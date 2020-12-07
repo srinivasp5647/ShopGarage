@@ -15,7 +15,9 @@
     {{form}}
     <!-- <input type="text" placeholder="Username" name="username">
     <input type="password" placeholder="Password" name="password"> -->
+    <p style="color: white;">Don't have an account? Create one <a href="{% url 'ecomapp:signin' %}">here</a></p>
     <input type="submit" name="" value="Login">
+    
   </form>
 
   {% endblock content %}

@@ -14,6 +14,7 @@ urlpatterns = [
     path('addtocart/', views.AddToCart, name='addtocart'),
     path('cart/', views.CartView, name='cart'),
     path('login/', views.LogIn, name='login'),
-    # path('signin/', views.SignIn, name='sigin'),
+    path('signin/', views.SignIn, name='signin'),
+    path('logout/', views.LogOut, name='logout'),
     
 ]
