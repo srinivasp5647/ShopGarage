@@ -47,12 +47,10 @@
           </ul>
           <div class="form-inline my-2 my-lg-0">
                 {% if user.is_authenticated %}
-                <!-- <p>Hello, {{user.username}}</p> -->
-                <a href="{% url 'ecomapp:logout' %}"class="btn btn-info" style="font-weight:bolder">Logout</a>
-
+                    <a href="{% url 'ecomapp:logout' %}"class="btn btn-info" style="font-weight:bolder">Logout</a>
                 {% else %}
-                <a href="{% url 'ecomapp:login' %}"class="btn btn-info" style="font-weight:bolder">Login</a>
-                <a href="{% url 'ecomapp:signin' %}" class="btn btn-info" style="margin:5px; font-weight:bolder;">Signin</a>
+                    <a href="{% url 'ecomapp:login' %}"class="btn btn-info" style="font-weight:bolder">Login</a>
+                    <a href="{% url 'ecomapp:signin' %}" class="btn btn-info" style="margin:5px; font-weight:bolder;">Signin</a>
                 {% endif %}
                 <a href="{% url 'ecomapp:cart'%}">
                   <img id="cart-icon" src="{% static 'images/icons/cart.png' %}">

@@ -2,9 +2,13 @@ function addToCart(event) {
     event.preventDefault();
     var pro_id = event.srcElement.dataset.prodid
     console.log('Product id :', pro_id);
-    
+    if (user === AnonymousUser){
+        console.log('user is not authenticated')
+    }else {
+        updateCart(pro_id)
+    }
    
-    updateCart(pro_id)
+    
     
 }
 

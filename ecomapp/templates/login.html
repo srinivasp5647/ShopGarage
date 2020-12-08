@@ -9,9 +9,13 @@
 </head>
 <body>
   {% block content %}
+  {% if error %}
+    <h3 style="text-align: center;">{{ error }}</h3>
+  {% endif %}
   <form class="box" method="POST">
     {% csrf_token %}
     <h1>Login</h1>
+
     {{form}}
     <!-- <input type="text" placeholder="Username" name="username">
     <input type="password" placeholder="Password" name="password"> -->

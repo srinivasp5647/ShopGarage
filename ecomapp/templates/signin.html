@@ -12,6 +12,9 @@
   <form class="box" method="POST">
     {% csrf_token %}
     <h1>Signin</h1>
+    {% if error %}
+    <h3>{{ error }}</h3>
+    {% endif %}
     {{form}}
     <!-- <input type="text" placeholder="Username" name="username">
     <input type="password" placeholder="Password" name="password"> -->
