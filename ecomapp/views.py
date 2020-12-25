@@ -7,16 +7,22 @@ import json
 from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+import pdb; 
+
+
 # Create your views here.
 
 class HomeView(TemplateView):
 
-    template_name = "home.html"
-    
+    # template_name = "home.html"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
 
+def home(request):
+
+    return render(request, 'home.html', {})
 
 def LogIn(request):
     form = loginform()
@@ -25,9 +31,10 @@ def LogIn(request):
         form = loginform(request.POST)
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(username= username, password= password)
+        user = auth.authenticate(username= username, password= password)
         print('user : ', user)
         if user is not None:
+            auth.login(request, user)
             return redirect('/')
         else:
             context = {'form' : form, 'error' : 'Not a registered user'}
@@ -129,7 +136,7 @@ def AddToCart(request):
 
     # check if cart exists
     cart_id =request.session.get('cart_id', None)
-    #request.session.flush()                            #this line delete existing sessions
+    # request.session.flush()                            #this line delete existing sessions
     print('this is session :', cart_id)
     if cart_id:
         cart_obj = Cart.objects.get(id=cart_id)
@@ -165,7 +172,24 @@ def AddToCart(request):
 def CartView(request):
     
     context = {}
-
+    cart_id =request.session.get('cart_id', None)
+    print('CARTID :', cart_id)
+    print(request.session.get('cart_id'))
+    if cart_id:
+        cart_obj = Cart.objects.get(id=cart_id)
+        cart_items = cart_obj.cartitem_set.all()
+        context['total'] = cart_items
+        context['cart'] = cart_obj
+    else:
+        cart_obj = None 
+        context['cart'] = cart_obj
+        # if cart_obj == None:
+        #     context['message'] = 'Empty Cart'
+        #     return render(request, 'cart.html', context)
+    print(context['cart'])
+    
+    # context['cart'] = cart_obj
+    # context['total'] = cart_items
     return render(request, 'cart.html', context)
 
 

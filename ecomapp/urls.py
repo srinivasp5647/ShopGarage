@@ -5,7 +5,7 @@ from ecomapp import views
 app_name = 'ecomapp'
 
 urlpatterns = [
-    path("", HomeView.as_view(), name='home'),
+    path("", views.home, name='home'),
     path("about/", AboutView.as_view(), name='about'),
     path("shoestore/", ShoeView.as_view(), name='shoestore'),
     path("menstore/", MenView.as_view(), name='menstore'),
